@@ -1,20 +1,18 @@
 export type Language = "th" | "en";
 
+export type ClayTone = "lavender" | "peach" | "mint" | "sky" | "butter" | "rose";
+
+export interface BilingualText {
+  th: string;
+  en: string;
+}
+
 export interface ProjectItem {
   id: string;
-  title: {
-    th: string;
-    en: string;
-  };
-  subtitle: {
-    th: string;
-    en: string;
-  };
+  title: BilingualText;
+  subtitle: BilingualText;
   category: "iot" | "web" | "hardware";
-  description: {
-    th: string;
-    en: string;
-  };
+  description: BilingualText;
   highlights: {
     th: string[];
     en: string[];
@@ -23,18 +21,9 @@ export interface ProjectItem {
 }
 
 export interface EducationItem {
-  degree: {
-    th: string;
-    en: string;
-  };
-  institution: {
-    th: string;
-    en: string;
-  };
-  period: {
-    th: string;
-    en: string;
-  };
+  degree: BilingualText;
+  institution: BilingualText;
+  period: BilingualText;
   details: {
     th: string[];
     en: string[];
@@ -50,4 +39,69 @@ export interface ContactInfo {
   locationEn: string;
   targetRolesTh: string[];
   targetRolesEn: string[];
+}
+
+export interface CourseItem {
+  id: string;
+  category: "iot" | "web" | "ai" | "hardware";
+  tone: ClayTone;
+  badge: BilingualText;
+  title: BilingualText;
+  description: BilingualText;
+  level: BilingualText;
+  duration: BilingualText;
+  lessonsCount: number;
+  studentsCount: string;
+  rating: number;
+  xpReward: number;
+  tools: string[];
+  syllabus: {
+    th: string[];
+    en: string[];
+  };
+}
+
+export interface ProgressLesson {
+  id: string;
+  title: BilingualText;
+  duration: string;
+  xp: number;
+  defaultCompleted: boolean;
+}
+
+export interface ProgressTrack {
+  id: string;
+  tone: ClayTone;
+  name: BilingualText;
+  subtitle: BilingualText;
+  badgeName: BilingualText;
+  weeklyMinutes: number[];
+  lessons: ProgressLesson[];
+}
+
+export interface TestimonialItem {
+  id: string;
+  tone: ClayTone;
+  name: BilingualText;
+  role: BilingualText;
+  course: BilingualText;
+  initials: string;
+  rating: number;
+  quote: BilingualText;
+  outcome: BilingualText;
+}
+
+export interface EnrollmentPlan {
+  id: string;
+  tone: ClayTone;
+  popular?: boolean;
+  name: BilingualText;
+  price: BilingualText;
+  period: BilingualText;
+  description: BilingualText;
+  features: {
+    th: string[];
+    en: string[];
+  };
+  ctaLabel: BilingualText;
 }

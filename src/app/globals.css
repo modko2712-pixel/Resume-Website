@@ -3,8 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
+  --background: 226 100% 97%;
+  --foreground: 244 47% 20%;
+  --clay-bg: #EEF2FF;
+  --clay-ink: #1E1B4B;
+  --clay-indigo: #4F46E5;
+  --clay-orange: #F97316;
+  --clay-mint: #10B981;
+  --clay-sky: #0EA5E9;
 }
 
 html {
@@ -12,32 +18,261 @@ html {
 }
 
 body {
-  color: #1e293b;
-  background-color: #fafbfc;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Sarabun", "Prompt", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #1E1B4B;
+  background-color: #EEF2FF;
+  background-image:
+    radial-gradient(circle at 12% 10%, rgba(129, 140, 248, 0.22) 0%, transparent 36%),
+    radial-gradient(circle at 88% 14%, rgba(251, 146, 60, 0.18) 0%, transparent 32%),
+    radial-gradient(circle at 80% 72%, rgba(52, 211, 153, 0.16) 0%, transparent 36%),
+    radial-gradient(circle at 14% 80%, rgba(56, 189, 248, 0.16) 0%, transparent 34%);
+  background-attachment: fixed;
+  font-family: "Nunito", "Noto Sans Thai", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-/* Subtle clean scrollbar */
+h1, h2, h3, h4, .font-display {
+  font-family: "Fredoka", "Noto Sans Thai", "Nunito", sans-serif;
+}
+
+/* =========================================================
+   UI/UX PRO MAX — CLAYMORPHISM COMPONENT UTILITIES
+   ========================================================= */
+@layer components {
+  .clay-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9ff 100%);
+    border: 3px solid rgba(255, 255, 255, 0.88);
+    border-radius: 1.75rem;
+    box-shadow:
+      inset -5px -5px 12px rgba(79, 70, 229, 0.08),
+      inset 5px 5px 12px rgba(255, 255, 255, 0.95),
+      0 14px 28px -8px rgba(79, 70, 229, 0.14);
+    transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 220ms ease-out;
+  }
+
+  .clay-card-interactive {
+    @apply clay-card cursor-pointer;
+  }
+
+  .clay-card-interactive:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      inset -5px -5px 12px rgba(79, 70, 229, 0.1),
+      inset 5px 5px 14px rgba(255, 255, 255, 0.98),
+      0 20px 36px -10px rgba(79, 70, 229, 0.22);
+  }
+
+  .clay-lavender {
+    background: linear-gradient(145deg, #F5F3FF 0%, #EDE9FE 100%);
+    border: 3px solid rgba(255, 255, 255, 0.85);
+    border-radius: 1.75rem;
+    box-shadow:
+      inset -5px -5px 12px rgba(109, 40, 217, 0.1),
+      inset 5px 5px 12px rgba(255, 255, 255, 0.92),
+      0 14px 28px -8px rgba(109, 40, 217, 0.16);
+  }
+
+  .clay-peach {
+    background: linear-gradient(145deg, #FFF7ED 0%, #FFEDD5 100%);
+    border: 3px solid rgba(255, 255, 255, 0.85);
+    border-radius: 1.75rem;
+    box-shadow:
+      inset -5px -5px 12px rgba(234, 88, 12, 0.1),
+      inset 5px 5px 12px rgba(255, 255, 255, 0.92),
+      0 14px 28px -8px rgba(234, 88, 12, 0.16);
+  }
+
+  .clay-mint {
+    background: linear-gradient(145deg, #ECFDF5 0%, #D1FAE5 100%);
+    border: 3px solid rgba(255, 255, 255, 0.85);
+    border-radius: 1.75rem;
+    box-shadow:
+      inset -5px -5px 12px rgba(5, 150, 105, 0.1),
+      inset 5px 5px 12px rgba(255, 255, 255, 0.92),
+      0 14px 28px -8px rgba(5, 150, 105, 0.15);
+  }
+
+  .clay-sky {
+    background: linear-gradient(145deg, #F0F9FF 0%, #E0F2FE 100%);
+    border: 3px solid rgba(255, 255, 255, 0.85);
+    border-radius: 1.75rem;
+    box-shadow:
+      inset -5px -5px 12px rgba(2, 132, 199, 0.1),
+      inset 5px 5px 12px rgba(255, 255, 255, 0.92),
+      0 14px 28px -8px rgba(2, 132, 199, 0.15);
+  }
+
+  .clay-butter {
+    background: linear-gradient(145deg, #FEFCE8 0%, #FEF3C7 100%);
+    border: 3px solid rgba(255, 255, 255, 0.85);
+    border-radius: 1.75rem;
+    box-shadow:
+      inset -5px -5px 12px rgba(217, 119, 6, 0.1),
+      inset 5px 5px 12px rgba(255, 255, 255, 0.92),
+      0 14px 28px -8px rgba(217, 119, 6, 0.15);
+  }
+
+  .clay-rose {
+    background: linear-gradient(145deg, #FFF1F2 0%, #FFE4E6 100%);
+    border: 3px solid rgba(255, 255, 255, 0.85);
+    border-radius: 1.75rem;
+    box-shadow:
+      inset -5px -5px 12px rgba(225, 29, 72, 0.1),
+      inset 5px 5px 12px rgba(255, 255, 255, 0.92),
+      0 14px 28px -8px rgba(225, 29, 72, 0.15);
+  }
+
+  .clay-btn-cta {
+    background: linear-gradient(145deg, #FB923C 0%, #F97316 100%);
+    color: #ffffff;
+    border: 3px solid rgba(255, 255, 255, 0.65);
+    border-radius: 1.15rem;
+    box-shadow:
+      inset -3px -4px 8px rgba(154, 52, 18, 0.28),
+      inset 3px 3px 8px rgba(255, 255, 255, 0.45),
+      0 10px 20px -6px rgba(249, 115, 22, 0.48);
+    font-family: "Fredoka", "Noto Sans Thai", sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 180ms ease-out, filter 180ms ease-out;
+  }
+
+  .clay-btn-cta:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.03);
+    box-shadow:
+      inset -3px -4px 8px rgba(154, 52, 18, 0.25),
+      inset 3px 3px 10px rgba(255, 255, 255, 0.55),
+      0 14px 26px -6px rgba(249, 115, 22, 0.56);
+  }
+
+  .clay-btn-cta:active {
+    transform: translateY(1px) scale(0.98);
+  }
+
+  .clay-btn-primary {
+    background: linear-gradient(145deg, #6366F1 0%, #4F46E5 100%);
+    color: #ffffff;
+    border: 3px solid rgba(255, 255, 255, 0.55);
+    border-radius: 1.15rem;
+    box-shadow:
+      inset -3px -4px 8px rgba(49, 46, 129, 0.3),
+      inset 3px 3px 8px rgba(255, 255, 255, 0.35),
+      0 10px 20px -6px rgba(79, 70, 229, 0.45);
+    font-family: "Fredoka", "Noto Sans Thai", sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 180ms ease-out;
+  }
+
+  .clay-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      inset -3px -4px 8px rgba(49, 46, 129, 0.28),
+      inset 3px 3px 10px rgba(255, 255, 255, 0.45),
+      0 14px 26px -6px rgba(79, 70, 229, 0.52);
+  }
+
+  .clay-btn-primary:active {
+    transform: translateY(1px) scale(0.98);
+  }
+
+  .clay-btn-soft {
+    background: linear-gradient(145deg, #ffffff 0%, #EEF2FF 100%);
+    color: #312E81;
+    border: 3px solid rgba(255, 255, 255, 0.9);
+    border-radius: 1.15rem;
+    box-shadow:
+      inset -3px -3px 7px rgba(79, 70, 229, 0.1),
+      inset 3px 3px 7px rgba(255, 255, 255, 0.95),
+      0 8px 16px -6px rgba(79, 70, 229, 0.18);
+    font-family: "Fredoka", "Noto Sans Thai", sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 180ms ease-out;
+  }
+
+  .clay-btn-soft:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      inset -3px -3px 7px rgba(79, 70, 229, 0.12),
+      inset 3px 3px 8px rgba(255, 255, 255, 0.98),
+      0 12px 22px -6px rgba(79, 70, 229, 0.25);
+  }
+
+  .clay-btn-soft:active {
+    transform: translateY(1px) scale(0.98);
+  }
+
+  .clay-pill {
+    border: 2.5px solid rgba(255, 255, 255, 0.85);
+    border-radius: 9999px;
+    box-shadow:
+      inset -2px -2px 5px rgba(79, 70, 229, 0.1),
+      inset 2px 2px 5px rgba(255, 255, 255, 0.9),
+      0 5px 12px -4px rgba(79, 70, 229, 0.16);
+  }
+
+  .clay-well {
+    background: #E8ECFF;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    border-radius: 1.25rem;
+    box-shadow:
+      inset 4px 4px 10px rgba(79, 70, 229, 0.14),
+      inset -4px -4px 10px rgba(255, 255, 255, 0.85);
+  }
+
+  .clay-input {
+    background: #ffffff;
+    border: 2.5px solid #C7D2FE;
+    border-radius: 1rem;
+    box-shadow:
+      inset 3px 3px 7px rgba(79, 70, 229, 0.08),
+      inset -2px -2px 6px rgba(255, 255, 255, 0.9);
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .clay-input:focus {
+    outline: none;
+    border-color: #4F46E5;
+    box-shadow:
+      inset 2px 2px 5px rgba(79, 70, 229, 0.08),
+      0 0 0 4px rgba(99, 102, 241, 0.22);
+  }
+}
+
+/* Custom playful scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #EEF2FF;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 3px;
+  background: #A5B4FC;
+  border-radius: 9999px;
+  border: 2px solid #EEF2FF;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #6366F1;
 }
 
-/* Print Styles for CV/Resume */
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print Styles for Official A4 CV/Resume Modal */
 @media print {
   body {
     background-color: white !important;
+    background-image: none !important;
     color: black !important;
   }
   .no-print {

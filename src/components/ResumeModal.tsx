@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Language } from "@/types";
-import { contactInfo, skillGroupsData, projectsData, educationData, aboutContent } from "@/data/portfolioData";
+import { contactInfo, projectsData, educationData, aboutContent } from "@/data/portfolioData";
 import { X, Printer, Phone, Mail, MapPin, Globe } from "lucide-react";
 
 interface ResumeModalProps {
@@ -14,6 +14,10 @@ interface ResumeModalProps {
 export default function ResumeModal({ isOpen, onClose, lang: initialLang }: ResumeModalProps) {
   const [modalLang, setModalLang] = useState<Language>(initialLang);
 
+  useEffect(() => {
+    setModalLang(initialLang);
+  }, [initialLang]);
+
   if (!isOpen) return null;
 
   const handlePrint = () => {
@@ -21,43 +25,50 @@ export default function ResumeModal({ isOpen, onClose, lang: initialLang }: Resu
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6 no-print-backdrop">
-      
+    <div
+      className="fixed inset-0 z-50 overflow-y-auto bg-indigo-950/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 no-print-backdrop"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Official Resume Preview"
+      onClick={onClose}
+    >
       {/* Modal Container */}
-      <div className="relative w-full max-w-4xl bg-white rounded-2xl shadow-xl border border-slate-300 overflow-hidden max-h-[92vh] flex flex-col my-auto">
-        
+      <div
+        className="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl border-4 border-white/90 overflow-hidden max-h-[92vh] flex flex-col my-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Top Control Bar (Hidden when printing) */}
-        <div className="no-print bg-slate-900 text-white px-5 py-3 flex items-center justify-between border-b border-slate-800 shrink-0">
+        <div className="no-print bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-5 py-3.5 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-sm">
-              {modalLang === "th" ? "เรซูเม่ - ทตพร แก้วมณี" : "Resume - Tataphorn Kaewmanee"}
+            <span className="font-heading font-bold text-sm sm:text-base">
+              {modalLang === "th" ? "เรซูเม่ฉบับทางการ — ทตพร แก้วมณี" : "Official Resume — Tataphorn Kaewmanee"}
             </span>
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Lang toggle */}
             <button
+              type="button"
               onClick={() => setModalLang(modalLang === "th" ? "en" : "th")}
-              className="text-xs font-medium px-2.5 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700 flex items-center gap-1.5 transition-colors"
+              className="text-xs font-bold px-3 py-1.5 bg-white/15 hover:bg-white/25 rounded-xl border border-white/30 flex items-center gap-1.5 transition-colors cursor-pointer"
             >
-              <Globe className="w-3 h-3" />
+              <Globe className="w-3.5 h-3.5" />
               <span>{modalLang.toUpperCase()}</span>
             </button>
 
-            {/* Print Button */}
             <button
+              type="button"
               onClick={handlePrint}
-              className="px-3 py-1 bg-white hover:bg-slate-100 text-slate-900 text-xs font-semibold rounded flex items-center gap-1.5 transition-colors"
+              className="clay-btn-cta px-3.5 py-1.5 text-xs flex items-center gap-1.5"
             >
               <Printer className="w-3.5 h-3.5" />
               <span>{modalLang === "th" ? "พิมพ์ / PDF" : "Print / PDF"}</span>
             </button>
 
-            {/* Close Button */}
             <button
+              type="button"
               onClick={onClose}
-              className="p-1 text-slate-400 hover:text-white rounded ml-2"
-              aria-label="Close"
+              className="p-1.5 text-indigo-100 hover:text-white hover:bg-white/15 rounded-xl ml-1 cursor-pointer transition-colors"
+              aria-label="Close Resume Modal"
             >
               <X className="w-5 h-5" />
             </button>
@@ -67,11 +78,10 @@ export default function ResumeModal({ isOpen, onClose, lang: initialLang }: Resu
         {/* Scrollable Printable Document Area */}
         <div className="p-6 sm:p-10 overflow-y-auto flex-1 bg-white text-slate-800 font-sans">
           <div className="max-w-3xl mx-auto space-y-6">
-            
             {/* Header with Photo & Bio */}
             <div className="flex flex-col sm:flex-row items-start justify-between gap-6 pb-6 border-b border-slate-300">
               <div className="flex items-start gap-5">
-                <div className="w-24 h-32 rounded-lg overflow-hidden bg-slate-100 border border-slate-300 shrink-0 shadow-2xs">
+                <div className="w-24 h-32 rounded-xl overflow-hidden bg-slate-100 border border-slate-300 shrink-0 shadow-sm">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/profile.jpg"
@@ -84,9 +94,7 @@ export default function ResumeModal({ isOpen, onClose, lang: initialLang }: Resu
                   <h1 className="text-2xl font-bold text-slate-900 leading-tight">
                     {contactInfo.nameTh}
                   </h1>
-                  <p className="text-sm font-semibold text-slate-700">
-                    ({contactInfo.nameEn})
-                  </p>
+                  <p className="text-sm font-semibold text-slate-700">({contactInfo.nameEn})</p>
                   <p className="text-xs text-slate-600 mt-1">
                     {modalLang === "th"
                       ? "นักศึกษาวิศวกรรมปัญญาประดิษฐ์ประยุกต์ ชั้นปีที่ 4"
@@ -117,12 +125,14 @@ export default function ResumeModal({ isOpen, onClose, lang: initialLang }: Resu
             </div>
 
             {/* Target Roles */}
-            <div className="bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs">
-              <span className="font-bold text-slate-800 mr-2">
+            <div className="bg-indigo-50/70 p-3 rounded-xl border border-indigo-200 text-xs">
+              <span className="font-bold text-indigo-950 mr-2">
                 {modalLang === "th" ? "ตำแหน่งที่สนใจ:" : "Target Roles:"}
               </span>
               <span className="text-slate-700">
-                {(modalLang === "th" ? contactInfo.targetRolesTh : contactInfo.targetRolesEn).join(" / ")}
+                {(modalLang === "th" ? contactInfo.targetRolesTh : contactInfo.targetRolesEn).join(
+                  " / "
+                )}
               </span>
             </div>
 
@@ -147,19 +157,25 @@ export default function ResumeModal({ isOpen, onClose, lang: initialLang }: Resu
                   <span className="text-slate-700">Python, C/C++, HTML, CSS, JavaScript, SQL</span>
                 </div>
                 <div className="bg-slate-50 p-2.5 rounded border border-slate-200">
-                  <span className="font-bold text-slate-900 block">Hardware & IoT/OT:</span>
-                  <span className="text-slate-700">Arduino, Node-RED, Sensor Integration, Embedded Systems, Microcontrollers</span>
+                  <span className="font-bold text-slate-900 block">Hardware &amp; IoT/OT:</span>
+                  <span className="text-slate-700">
+                    Arduino, Node-RED, Sensor Integration, Embedded Systems, Microcontrollers
+                  </span>
                 </div>
                 <div className="bg-slate-50 p-2.5 rounded border border-slate-200">
-                  <span className="font-bold text-slate-900 block">AI & Data Analysis:</span>
-                  <span className="text-slate-700">Google Colab, Data Preprocessing, Basic Machine Learning Models</span>
+                  <span className="font-bold text-slate-900 block">AI &amp; Data Analysis:</span>
+                  <span className="text-slate-700">
+                    Google Colab, Data Preprocessing, Basic Machine Learning Models
+                  </span>
                 </div>
                 <div className="bg-slate-50 p-2.5 rounded border border-slate-200">
-                  <span className="font-bold text-slate-900 block">Systems & Infrastructure:</span>
-                  <span className="text-slate-700">Hardware Assembly & Troubleshooting, PC Configuration, System Maintenance</span>
+                  <span className="font-bold text-slate-900 block">Systems &amp; Infrastructure:</span>
+                  <span className="text-slate-700">
+                    Hardware Assembly &amp; Troubleshooting, PC Configuration, System Maintenance
+                  </span>
                 </div>
                 <div className="col-span-1 sm:col-span-2 bg-slate-50 p-2 rounded border border-slate-200">
-                  <span className="font-bold text-slate-900 mr-2">Tools & Platforms:</span>
+                  <span className="font-bold text-slate-900 mr-2">Tools &amp; Platforms:</span>
                   <span className="text-slate-700">Git, GitHub, VS Code, Arduino IDE</span>
                 </div>
               </div>
@@ -168,7 +184,9 @@ export default function ResumeModal({ isOpen, onClose, lang: initialLang }: Resu
             {/* Projects & Experience */}
             <div>
               <h2 className="text-xs font-bold uppercase tracking-wider text-slate-900 border-b border-slate-200 pb-1 mb-3">
-                {modalLang === "th" ? "ประสบการณ์และโปรเจกต์ (PROJECTS & EXPERIENCE)" : "PROJECTS & EXPERIENCE"}
+                {modalLang === "th"
+                  ? "ประสบการณ์และโปรเจกต์ (PROJECTS & EXPERIENCE)"
+                  : "PROJECTS & EXPERIENCE"}
               </h2>
               <div className="space-y-3.5 text-xs">
                 {projectsData.map((project, idx) => (
@@ -195,33 +213,35 @@ export default function ResumeModal({ isOpen, onClose, lang: initialLang }: Resu
               </h2>
               <div className="space-y-2 text-xs">
                 {educationData.map((edu, idx) => (
-                  <div key={idx} className="flex flex-col sm:flex-row sm:items-start justify-between gap-1">
+                  <div
+                    key={idx}
+                    className="flex flex-col sm:flex-row sm:items-start justify-between gap-1"
+                  >
                     <div>
                       <span className="font-bold text-slate-900">{edu.degree[modalLang]}</span>
                       <span className="text-slate-600 block">{edu.institution[modalLang]}</span>
                     </div>
-                    <span className="text-slate-500 font-mono shrink-0">
-                      {edu.period[modalLang]}
-                    </span>
+                    <span className="text-slate-500 font-mono shrink-0">{edu.period[modalLang]}</span>
                   </div>
                 ))}
               </div>
             </div>
-
           </div>
         </div>
 
         {/* Modal Footer (Hidden when printing) */}
-        <div className="no-print bg-slate-50 px-5 py-3 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500 shrink-0">
-          <span>{modalLang === "th" ? "ข้อมูลตรงตามเอกสารต้นฉบับ" : "Matching original resume data"}</span>
+        <div className="no-print bg-indigo-50 px-5 py-3 border-t border-indigo-100 flex items-center justify-between text-xs text-indigo-900 shrink-0">
+          <span className="font-bold">
+            {modalLang === "th" ? "ข้อมูลตรงตามเอกสารต้นฉบับ A4" : "Matching original A4 resume data"}
+          </span>
           <button
+            type="button"
             onClick={onClose}
-            className="px-3 py-1 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded font-medium transition-colors"
+            className="clay-btn-soft px-4 py-1.5 text-xs"
           >
-            {modalLang === "th" ? "ปิด" : "Close"}
+            {modalLang === "th" ? "ปิดหน้าต่าง" : "Close"}
           </button>
         </div>
-
       </div>
     </div>
   );

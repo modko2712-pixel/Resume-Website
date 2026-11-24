@@ -3,7 +3,7 @@
 import React from "react";
 import { Language } from "@/types";
 import { contactInfo } from "@/data/portfolioData";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Sparkles } from "lucide-react";
 
 interface FooterProps {
   lang: Language;
@@ -15,50 +15,63 @@ export default function Footer({ lang }: FooterProps) {
   };
 
   return (
-    <footer className="bg-slate-900 text-slate-300 py-10 border-t border-slate-800 text-xs">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-slate-800">
-          <div>
-            <span className="font-bold text-white text-sm block">
-              {contactInfo.nameTh} ({contactInfo.nameEn})
-            </span>
-            <span className="text-slate-400 mt-0.5 block">
-              {lang === "th"
-                ? "วิศวกรรมปัญญาประดิษฐ์ประยุกต์ • มหาวิทยาลัยเทคโนโลยีราชมงคลศรีวิชัย วิทยาเขตรัตนภูมิ"
-                : "Applied AI & IoT Engineering • RMUTSV Rattaphum Campus"}
-            </span>
+    <footer className="pb-10 pt-4 px-4 sm:px-6 no-print">
+      <div className="max-w-6xl mx-auto clay-card p-6 sm:p-8">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b-2 border-indigo-100">
+          <div className="flex items-center gap-3.5">
+            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 text-white flex items-center justify-center font-heading font-bold text-base shadow-clay-btn border-2 border-white/70 shrink-0">
+              TK
+            </div>
+            <div>
+              <span className="font-heading font-bold text-clay-ink text-base flex items-center gap-1.5">
+                <span>TK PlayLab — {contactInfo.nameTh}</span>
+                <Sparkles className="w-4 h-4 text-orange-500" />
+              </span>
+              <span className="text-xs font-semibold text-slate-600 block mt-0.5">
+                {lang === "th"
+                  ? "วิศวกรรมปัญญาประดิษฐ์ประยุกต์ • มหาวิทยาลัยเทคโนโลยีราชมงคลศรีวิชัย วิทยาเขตรัตนภูมิ"
+                  : "Applied AI & IoT Engineering • RMUTSV Rattaphum Campus"}
+              </span>
+            </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <a href="#about" className="hover:text-white transition-colors">
-              {lang === "th" ? "เกี่ยวกับฉัน" : "About"}
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm font-bold text-clay-ink/80">
+            <a href="#courses" className="hover:text-indigo-700 transition-colors cursor-pointer">
+              {lang === "th" ? "คอร์สเรียน" : "Courses"}
             </a>
-            <a href="#skills" className="hover:text-white transition-colors">
-              {lang === "th" ? "ทักษะ" : "Skills"}
+            <a href="#progress-demo" className="hover:text-indigo-700 transition-colors cursor-pointer">
+              {lang === "th" ? "Progress Demo" : "Progress Demo"}
             </a>
-            <a href="#projects" className="hover:text-white transition-colors">
-              {lang === "th" ? "ผลงาน" : "Projects"}
+            <a href="#iot-showcase" className="hover:text-indigo-700 transition-colors cursor-pointer">
+              {lang === "th" ? "IoT Lab" : "IoT Lab"}
             </a>
-            <a href="#contact" className="hover:text-white transition-colors">
-              {lang === "th" ? "ติดต่อ" : "Contact"}
+            <a href="#testimonials" className="hover:text-indigo-700 transition-colors cursor-pointer">
+              {lang === "th" ? "รีวิวผู้เรียน" : "Reviews"}
+            </a>
+            <a href="#enroll" className="hover:text-orange-600 transition-colors cursor-pointer">
+              {lang === "th" ? "สมัครเรียน" : "Enroll"}
             </a>
 
             <button
+              type="button"
               onClick={scrollToTop}
-              className="p-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 ml-2"
+              className="clay-btn-primary p-2.5 ml-1"
+              aria-label="Back to top"
               title="Back to top"
             >
-              <ArrowUp className="w-3.5 h-3.5" />
+              <ArrowUp className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-slate-500 gap-2">
+        <div className="pt-5 flex flex-col sm:flex-row items-center justify-between text-xs font-semibold text-slate-500 gap-2">
           <span>
-            © {new Date().getFullYear()} {contactInfo.nameEn}.
+            © {new Date().getFullYear()} {contactInfo.nameEn} • TK PlayLab
           </span>
           <span>
-            Portfolio & Resume Web Application
+            {lang === "th"
+              ? "ออกแบบด้วย Claymorphism Design System (UI/UX Pro Max)"
+              : "Crafted with Claymorphism Design System (UI/UX Pro Max)"}
           </span>
         </div>
       </div>
